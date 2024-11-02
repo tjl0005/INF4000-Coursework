@@ -2,14 +2,10 @@
 library(tidyverse)
 library(dplyr)
 
-list.files("../Visulisation Data")
-
-# Reading data
-example_data <-read_csv("../Visulisation Data/xzy.csv")
+list.files("./Data")
 
 # Top-Left - Collision frequency/severity at time of day – Circular time plot
-# - number of collisions per hour
-# 
+
 
 # Top-Right - Collisions with recorded dangerous factors – Faceted pie chart
 
