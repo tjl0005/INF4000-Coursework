@@ -47,7 +47,10 @@ journey_chart <- ggplot(journey_type_counts, aes(x="", y=Count, fill=journey_pur
   geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0) +
   labs(y="", fill="Journey") + 
-  scale_fill_manual(values=c(Work="#e69138", Leisure="#9c27b0", School="#335676")) +
+  scale_fill_manual(values = c("Work" = "mediumturquoise",
+                               "Leisure" = "#bc80bd",
+                               "School" = "#ffed6f"
+  )) +
   theme_minimal() +
   theme(legend.position = "bottom",
         axis.text=element_blank(), axis.ticks=element_blank(),
@@ -88,7 +91,7 @@ collision_heatmap <- ggplot(districts_with_collisions) +
   # Plotting spacial data and using percentage of collisions for colours
   geom_sf(aes(fill=collisions)) + 
   #scale_fill_gradient(low="lightyellow", high="red") +
-  scale_fill_viridis_c() +
+  scale_fill_viridis_c(name = "Collisions") +
   labs(title="Collisions by Area",) +
   theme_minimal() +
   theme(legend.position = "bottom",
@@ -97,12 +100,4 @@ collision_heatmap <- ggplot(districts_with_collisions) +
         plot.title = element_text(hjust = 0.5))
 
 ggsave("./Visualisations/collision_heatmap.png", plot=collision_heatmap, width=10, height=8)
-
-# *****************************************************************************#
-# Composite Visualisation
-# *****************************************************************************#
-composite <- (hourly_collisions | collision_heatmap) / (driver_metrics | driving_factors) +
-  plot_annotation(title="UK Drivers Over the Past 5 Years")
-
-ggsave("composite_visualisation.png", plot=composite, width=15, height=15, dpi=300)
 
